@@ -1,0 +1,66 @@
+[gd_scene load_steps=10 format=3 uid="uid://d38886fk6eio3"]
+
+[ext_resource type="Script" path="res://scripts/magics/basic_magic.gd" id="1_3pjay"]
+[ext_resource type="Texture2D" uid="uid://cvvh16rwlkhve" path="res://assets/spells/Firebolt SpriteSheet.png" id="3_ojhlm"]
+[ext_resource type="AudioStream" uid="uid://b7j0igchfwkvh" path="res://assets/sounds/magics/04_Fire_explosion_04_medium.wav" id="3_xlko7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1yvlq"]
+size = Vector2(8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hcori"]
+atlas = ExtResource("3_ojhlm")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_etlnt"]
+atlas = ExtResource("3_ojhlm")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_un48l"]
+atlas = ExtResource("3_ojhlm")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7y3s7"]
+atlas = ExtResource("3_ojhlm")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5wpc5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hcori")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_etlnt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_un48l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7y3s7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="BasicMagic" type="Area2D"]
+script = ExtResource("1_3pjay")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1yvlq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-13, -6)
+sprite_frames = SubResource("SpriteFrames_5wpc5")
+autoplay = "default"
+frame_progress = 0.001839
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_xlko7")
+
+[node name="MagicTimer" type="Timer" parent="."]
+wait_time = 15.0
+autostart = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="MagicTimer" to="." method="_on_magic_timer_timeout"]

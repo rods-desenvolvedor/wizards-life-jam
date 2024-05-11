@@ -1,0 +1,120 @@
+[gd_scene load_steps=10 format=3 uid="uid://bvu1kdcehtp5s"]
+
+[ext_resource type="Texture2D" uid="uid://gyn0sq3cfw3k" path="res://assets/tilemap.png" id="1_6i3ln"]
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_ggj4s"]
+[ext_resource type="PackedScene" uid="uid://d38886fk6eio3" path="res://scenes/magics/basic_magic.tscn" id="2_ord44"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3qvcm"]
+atlas = ExtResource("1_6i3ln")
+region = Rect2(0, 120, 16, 15)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8h1mq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3qvcm")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sex0f"]
+radius = 6.0
+
+[sub_resource type="Animation" id="Animation_j08yy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_jx4oh"]
+resource_name = "get_hit"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.775861, 0.240518, 0.193508, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5rvps"]
+_data = {
+"RESET": SubResource("Animation_j08yy"),
+"get_hit": SubResource("Animation_jx4oh")
+}
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+z_index = 5
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_ggj4s")
+basic_magic_scene = ExtResource("2_ord44")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_8h1mq")
+animation = &"walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_sex0f")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="PlayerHealth" type="ProgressBar" parent="CanvasLayer/Control"]
+modulate = Color(0.796341, 0.0811548, 3.85046e-07, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -143.0
+offset_top = 21.0
+offset_right = 143.0
+offset_bottom = 48.0
+grow_horizontal = 2
+
+[node name="PlayerMana" type="ProgressBar" parent="CanvasLayer/Control"]
+modulate = Color(0, 0.479641, 0.905685, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -132.0
+offset_top = 56.0
+offset_right = 128.0
+offset_bottom = 83.0
+grow_horizontal = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5rvps")
+}

@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://dui06bls6u7rq"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_jadki"]
+[ext_resource type="PackedScene" uid="uid://bvu1kdcehtp5s" path="res://scenes/player/player.tscn" id="1_ux7or"]
+[ext_resource type="PackedScene" uid="uid://df0t3clmi0ro8" path="res://scenes/UI/player_status.tscn" id="5_5tq3q"]
+[ext_resource type="PackedScene" uid="uid://b1f633y005pgb" path="res://scenes/tests/test_map.tscn" id="5_w6puo"]
+[ext_resource type="Texture2D" uid="uid://b2noxysbw72ml" path="res://assets/UI/PNG/iconCross_grey.png" id="6_bjrep"]
+[ext_resource type="PackedScene" uid="uid://cskwtk0k0q3ir" path="res://scenes/enemies/basic_enemy.tscn" id="6_sh5tk"]
+[ext_resource type="PackedScene" uid="uid://btk0vbb2f8hc1" path="res://scenes/npcs/ghost_master_npc.tscn" id="7_x0w0a"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_jadki")
+
+[node name="Player" parent="." instance=ExtResource("1_ux7or")]
+position = Vector2(151, 80)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(3, 3)
+position_smoothing_enabled = true
+
+[node name="ShopTimer" type="Timer" parent="."]
+wait_time = 20.0
+autostart = true
+
+[node name="PlayerStatus" parent="." instance=ExtResource("5_5tq3q")]
+
+[node name="CloseStatusButton" type="Button" parent="PlayerStatus"]
+process_mode = 2
+offset_left = 687.0
+offset_top = 190.0
+offset_right = 711.0
+offset_bottom = 213.0
+icon = ExtResource("6_bjrep")
+
+[node name="test_map" parent="." instance=ExtResource("5_w6puo")]
+
+[node name="Enemys" type="Node2D" parent="."]
+
+[node name="BasicEnemy" parent="Enemys" instance=ExtResource("6_sh5tk")]
+position = Vector2(414, 74)
+
+[node name="GhostMasterNpc" parent="." instance=ExtResource("7_x0w0a")]
+position = Vector2(132, 204)
+
+[node name="StartPosition" type="Marker2D" parent="." groups=["start_pos"]]
+position = Vector2(107, 87)
+
+[connection signal="timeout" from="ShopTimer" to="." method="_on_shop_timer_timeout"]
+[connection signal="pressed" from="PlayerStatus/CloseStatusButton" to="." method="_on_close_status_button_pressed"]
+[connection signal="player_hit" from="Enemys/BasicEnemy" to="Player" method="_on_basic_enemy_player_hit"]

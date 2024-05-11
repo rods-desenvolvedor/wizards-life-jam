@@ -1,0 +1,45 @@
+[gd_scene load_steps=3 format=3 uid="uid://n6jbfghjontf"]
+
+[ext_resource type="Script" path="res://scripts/UI/main_menu.gd" id="1_ad7im"]
+[ext_resource type="PackedScene" uid="uid://dui06bls6u7rq" path="res://scenes/main.tscn" id="2_5p47s"]
+
+[node name="MainMenu" type="CanvasLayer"]
+script = ExtResource("1_ad7im")
+main_scene = ExtResource("2_5p47s")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartButton" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 529.0
+offset_top = 331.0
+offset_right = 599.0
+offset_bottom = 362.0
+text = "START :)"
+
+[node name="OptionsButton" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 530.0
+offset_top = 384.0
+offset_right = 609.0
+offset_bottom = 415.0
+text = "OPTIONS
+"
+
+[node name="QuitButton" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 535.0
+offset_top = 429.0
+offset_right = 596.0
+offset_bottom = 460.0
+text = "QUIT :("
+
+[connection signal="pressed" from="Control/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Control/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="Control/QuitButton" to="." method="_on_quit_button_pressed"]

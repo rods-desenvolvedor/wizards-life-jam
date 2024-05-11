@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://df0t3clmi0ro8"]
+
+[node name="PlayerStatus" type="CanvasLayer"]
+process_mode = 2
+visible = false
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -81.0
+offset_top = -214.0
+offset_right = 119.0
+offset_bottom = 186.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.621952, 0.404166, 0.257154, 1)
+
+[node name="DaysSurvivedLabel" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 526.0
+offset_top = 268.0
+offset_right = 689.0
+offset_bottom = 291.0
+text = "DAYS SURVIVED : "
+
+[node name="ExperienceLabel" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 530.0
+offset_top = 296.0
+offset_right = 693.0
+offset_bottom = 319.0
+text = "Experience :"
+
+[node name="RankLabel" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 530.0
+offset_top = 325.0
+offset_right = 693.0
+offset_bottom = 348.0
+text = "Rank : "
+
+[node name="BaseLabel" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 582.0
+offset_top = 196.0
+offset_right = 622.0
+offset_bottom = 219.0
+text = "JOURNAL"
+
+[node name="Inventory" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 568.0
+offset_top = 431.0
+offset_right = 659.0
+offset_bottom = 454.0
+text = "INVENTORY"
+
+[node name="ITEMS" type="Control" parent="Control"]
+anchors_preset = 0
+offset_left = 542.0
+offset_top = 477.0
+offset_right = 692.0
+offset_bottom = 566.0

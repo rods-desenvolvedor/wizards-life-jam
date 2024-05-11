@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://btk0vbb2f8hc1"]
+
+[ext_resource type="Texture2D" uid="uid://gyn0sq3cfw3k" path="res://assets/tilemap.png" id="1_0gx8m"]
+
+[node name="GhostMasterNpc" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_0gx8m")
+region_enabled = true
+region_rect = Rect2(52.2639, 152.851, 13.6603, 17.8672)

@@ -1,0 +1,121 @@
+[gd_scene load_steps=10 format=3 uid="uid://bgwtbi2aln2kp"]
+
+[ext_resource type="Script" path="res://scripts/UI/simple_shop.gd" id="1_q1j4s"]
+[ext_resource type="Texture2D" uid="uid://jrw8dbpnltk0" path="res://assets/UI/PNG/arrowBrown_right.png" id="2_abee5"]
+[ext_resource type="Texture2D" uid="uid://gyn0sq3cfw3k" path="res://assets/tilemap.png" id="2_fexsn"]
+[ext_resource type="Texture2D" uid="uid://b7lbcqovr14fd" path="res://assets/UI/PNG/arrowBrown_left.png" id="3_quxyk"]
+[ext_resource type="Texture2D" uid="uid://h2ay3mgbox4p" path="res://assets/UI/PNG/iconCross_brown.png" id="5_iq322"]
+[ext_resource type="Texture2D" uid="uid://bvlsuxebrfr1s" path="res://assets/UI/PNG/panel_brown.png" id="6_672i1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4yivy"]
+atlas = ExtResource("2_fexsn")
+region = Rect2(118, 154, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ymihy"]
+atlas = ExtResource("2_fexsn")
+region = Rect2(134, 152, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ioncy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4yivy")
+}],
+"loop": true,
+"name": &"health_potion",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ymihy")
+}],
+"loop": true,
+"name": &"mana_potion",
+"speed": 5.0
+}]
+
+[node name="SimpleShop" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_q1j4s")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -151.0
+offset_right = -50.0
+offset_bottom = -51.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.513233, 0.513233, 0.513233, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 398.0
+offset_top = 252.0
+offset_right = 498.0
+offset_bottom = 275.0
+text = "MAGIC SHOP"
+
+[node name="RightButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 463.0
+offset_top = 316.0
+offset_right = 493.0
+offset_bottom = 345.0
+icon = ExtResource("2_abee5")
+
+[node name="LeftButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 410.0
+offset_top = 318.0
+offset_right = 440.0
+offset_bottom = 347.0
+icon = ExtResource("3_quxyk")
+
+[node name="Icon" type="AnimatedSprite2D" parent="."]
+position = Vector2(443, 294)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_ioncy")
+animation = &"mana_potion"
+
+[node name="CloseButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 520.0
+offset_top = 256.0
+offset_right = 544.0
+offset_bottom = 279.0
+icon = ExtResource("5_iq322")
+
+[node name="BuyButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 485.0
+offset_top = 283.0
+offset_right = 593.0
+offset_bottom = 391.0
+scale = Vector2(0.5, 0.25)
+icon = ExtResource("6_672i1")
+
+[node name="Label" type="Label" parent="BuyButton"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 20.0
+offset_right = 56.0
+offset_bottom = 43.0
+scale = Vector2(3, 3)
+theme_override_font_sizes/font_size = 10
+text = "buy"
+
+[connection signal="pressed" from="RightButton" to="." method="_on_right_button_pressed"]
+[connection signal="pressed" from="LeftButton" to="." method="_on_left_button_pressed"]
+[connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="BuyButton" to="." method="_on_buy_button_pressed"]

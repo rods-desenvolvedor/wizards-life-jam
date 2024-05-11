@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://b35l1pgr275gt"]
+
+[ext_resource type="Texture2D" uid="uid://gyn0sq3cfw3k" path="res://assets/tilemap.png" id="1_jrai4"]
+[ext_resource type="Script" path="res://scripts/npcs/simple_npc.gd" id="1_la7h8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m80lm"]
+radius = 24.0208
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ab1kk"]
+radius = 5.09902
+
+[node name="SimpleNpc" type="CharacterBody2D"]
+script = ExtResource("1_la7h8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_jrai4")
+region_enabled = true
+region_rect = Rect2(17.0401, 120.762, 15.5868, 16.3338)
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_m80lm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_ab1kk")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
