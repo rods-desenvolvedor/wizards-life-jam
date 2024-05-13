@@ -1,18 +1,26 @@
-[gd_scene load_steps=8 format=3 uid="uid://dui06bls6u7rq"]
+[gd_scene load_steps=10 format=3 uid="uid://dui06bls6u7rq"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_jadki"]
 [ext_resource type="PackedScene" uid="uid://bvu1kdcehtp5s" path="res://scenes/player/player.tscn" id="1_ux7or"]
+[ext_resource type="PackedScene" uid="uid://bh75d87fiok4o" path="res://scenes/final_fight/final_fight_enemy.tscn" id="2_5kw0i"]
 [ext_resource type="PackedScene" uid="uid://df0t3clmi0ro8" path="res://scenes/UI/player_status.tscn" id="5_5tq3q"]
 [ext_resource type="PackedScene" uid="uid://b1f633y005pgb" path="res://scenes/tests/test_map.tscn" id="5_w6puo"]
 [ext_resource type="Texture2D" uid="uid://b2noxysbw72ml" path="res://assets/UI/PNG/iconCross_grey.png" id="6_bjrep"]
-[ext_resource type="PackedScene" uid="uid://cskwtk0k0q3ir" path="res://scenes/enemies/basic_enemy.tscn" id="6_sh5tk"]
 [ext_resource type="PackedScene" uid="uid://btk0vbb2f8hc1" path="res://scenes/npcs/ghost_master_npc.tscn" id="7_x0w0a"]
+[ext_resource type="PackedScene" uid="uid://b5545ptub214b" path="res://scenes/final_fight/final_fight_area.tscn" id="8_f0bj5"]
+
+[sub_resource type="Curve2D" id="Curve2D_y3vv8"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1560, -624, 0, 0, 0, 0, 2672, -624, 0, 0, 0, 0, 2680, -192, 0, 0, 0, 0, 1560, -192, 0, 0, 0, 0, 1560, -624)
+}
+point_count = 5
 
 [node name="Main" type="Node"]
 script = ExtResource("1_jadki")
+enemy_scene = ExtResource("2_5kw0i")
 
 [node name="Player" parent="." instance=ExtResource("1_ux7or")]
-position = Vector2(151, 80)
+position = Vector2(1653, 242)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(3, 3)
@@ -34,17 +42,24 @@ icon = ExtResource("6_bjrep")
 
 [node name="test_map" parent="." instance=ExtResource("5_w6puo")]
 
-[node name="Enemys" type="Node2D" parent="."]
-
-[node name="BasicEnemy" parent="Enemys" instance=ExtResource("6_sh5tk")]
-position = Vector2(414, 74)
-
 [node name="GhostMasterNpc" parent="." instance=ExtResource("7_x0w0a")]
 position = Vector2(132, 204)
 
 [node name="StartPosition" type="Marker2D" parent="." groups=["start_pos"]]
 position = Vector2(107, 87)
 
+[node name="FinalFightArea" parent="." instance=ExtResource("8_f0bj5")]
+position = Vector2(1531, 94)
+
+[node name="MobPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_y3vv8")
+
+[node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
+position = Vector2(1560, -624)
+
+[node name="MobTimer" type="Timer" parent="."]
+wait_time = 5.0
+
 [connection signal="timeout" from="ShopTimer" to="." method="_on_shop_timer_timeout"]
 [connection signal="pressed" from="PlayerStatus/CloseStatusButton" to="." method="_on_close_status_button_pressed"]
-[connection signal="player_hit" from="Enemys/BasicEnemy" to="Player" method="_on_basic_enemy_player_hit"]
+[connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]

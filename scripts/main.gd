@@ -3,6 +3,7 @@ extends Node
 
 @onready var shop_timer : Timer = $ShopTimer
 @onready var player : CharacterBody2D = $Player
+@export var enemy_scene : PackedScene
 
 var status_open : bool = false
 
@@ -40,3 +41,15 @@ func _on_close_status_button_pressed():
 	get_tree().paused = false
 	$PlayerStatus.hide()
 	
+
+
+func _on_mob_timer_timeout():
+	var final_enemy : CharacterBody2D = enemy_scene.instantiate()
+	var mob_spawn_location = $MobPath/MobSpawnLocation
+	mob_spawn_location.progress_ratio = randf()
+	
+	var direction = mob_spawn_location.rotation + PI / 2
+	
+	final_enemy.position = mob_spawn_location.position
+	
+	add_child(final_enemy)

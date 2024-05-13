@@ -1,0 +1,82 @@
+[gd_scene load_steps=5 format=3 uid="uid://b5545ptub214b"]
+
+[ext_resource type="Script" path="res://scripts/final_fight/final_fight_area.gd" id="1_ltk5m"]
+[ext_resource type="Texture2D" uid="uid://cx46p4s4qtst7" path="res://assets/tilemap_packed.png" id="1_rs7r8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nt2cb"]
+size = Vector2(454, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lc36c"]
+size = Vector2(455, 20)
+
+[node name="FinalFightArea" type="Area2D"]
+script = ExtResource("1_ltk5m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(217, -116)
+shape = SubResource("RectangleShape2D_nt2cb")
+
+[node name="Fence" type="Node2D" parent="."]
+position = Vector2(-57, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Fence"]
+position = Vector2(216, 1)
+texture = ExtResource("1_rs7r8")
+region_enabled = true
+region_rect = Rect2(65.1538, 97.2778, 45.5437, 14.7915)
+
+[node name="Sprite2D2" type="Sprite2D" parent="Fence"]
+position = Vector2(256, 1)
+texture = ExtResource("1_rs7r8")
+region_enabled = true
+region_rect = Rect2(65.1538, 97.2778, 45.5437, 14.7915)
+
+[node name="Sprite2D3" type="Sprite2D" parent="Fence"]
+position = Vector2(297, 1)
+texture = ExtResource("1_rs7r8")
+region_enabled = true
+region_rect = Rect2(65.1538, 97.2778, 45.5437, 14.7915)
+
+[node name="Sprite2D4" type="Sprite2D" parent="Fence"]
+position = Vector2(339, 1)
+texture = ExtResource("1_rs7r8")
+region_enabled = true
+region_rect = Rect2(65.1538, 97.2778, 45.5437, 14.7915)
+
+[node name="Sprite2D5" type="Sprite2D" parent="Fence"]
+position = Vector2(380, 1)
+texture = ExtResource("1_rs7r8")
+region_enabled = true
+region_rect = Rect2(65.1538, 97.2778, 45.5437, 14.7915)
+
+[node name="Sprite2D6" type="Sprite2D" parent="Fence"]
+position = Vector2(421, 1)
+texture = ExtResource("1_rs7r8")
+region_enabled = true
+region_rect = Rect2(65.1538, 97.2778, 45.5437, 14.7915)
+
+[node name="Sprite2D7" type="Sprite2D" parent="Fence"]
+position = Vector2(175, 1)
+texture = ExtResource("1_rs7r8")
+region_enabled = true
+region_rect = Rect2(65.1538, 97.2778, 45.5437, 14.7915)
+
+[node name="Sprite2D8" type="Sprite2D" parent="Fence"]
+position = Vector2(134, 1)
+texture = ExtResource("1_rs7r8")
+region_enabled = true
+region_rect = Rect2(65.1538, 97.2778, 45.5437, 14.7915)
+
+[node name="Sprite2D9" type="Sprite2D" parent="Fence"]
+position = Vector2(94, 1)
+texture = ExtResource("1_rs7r8")
+region_enabled = true
+region_rect = Rect2(65.1538, 97.2778, 45.5437, 14.7915)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(217.5, 0)
+shape = SubResource("RectangleShape2D_lc36c")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
