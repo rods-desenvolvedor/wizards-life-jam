@@ -15,6 +15,7 @@ var money : float = 100.0
 var experience : float = 0.0
 var health : float = 100.0
 var mana : float = 100.0
+var player_death_count : int
 
 
 var health_potion : int = 0
@@ -29,15 +30,19 @@ var inventory = {
 @export var basic_magic_scene : PackedScene
 
 func _ready():
+	
+	print(str(player_death_count))
 	health_progress_bar.value = 100.0
 	mana_progress_bar.value = 100.0
 
 func _process(delta):
+	Dialogic.VAR.death_count = player_death_count 
 	health_progress_bar.value = health
 	mana_progress_bar.value = mana
 	
 
 func _physics_process(delta):
+	
 	
 	var direction : Vector2 = Vector2.ZERO
 	
@@ -70,6 +75,9 @@ func _physics_process(delta):
 func die():
 	if health <= 0:
 		position = get_tree().get_first_node_in_group("start_pos").position
+		health = 100.0
+		mana += 10.0
+		player_death_count += 1
 	
 
 func shoot():
