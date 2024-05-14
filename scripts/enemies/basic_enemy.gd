@@ -22,6 +22,7 @@ func _process(delta):
 	
 	enemy_health_progress_bar.value = health
 	
+	
 	if health <= 0:
 		player.experience += 10.0
 		queue_free()
@@ -40,7 +41,8 @@ func _process(delta):
 
 
 func _on_area_2d_area_entered(area):
-	health -= 50.0
+	if area.has_method("is_magic"):
+		health -= 50.0
 
 
 func _on_chase_area_body_entered(body):

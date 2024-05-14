@@ -46,7 +46,8 @@ animations/join_default_wait=true
 text/autopauses={}
 glossary/default_case_sensitive=true
 variables={
-"death_count": 0
+"death_count": 0,
+"on_dialogue": false
 }
 
 [display]

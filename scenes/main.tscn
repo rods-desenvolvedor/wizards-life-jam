@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dui06bls6u7rq"]
+[gd_scene load_steps=12 format=3 uid="uid://dui06bls6u7rq"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_jadki"]
 [ext_resource type="PackedScene" uid="uid://bvu1kdcehtp5s" path="res://scenes/player/player.tscn" id="1_ux7or"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://btk0vbb2f8hc1" path="res://scenes/npcs/ghost_master_npc.tscn" id="7_x0w0a"]
 [ext_resource type="PackedScene" uid="uid://b5545ptub214b" path="res://scenes/final_fight/final_fight_area.tscn" id="8_f0bj5"]
 [ext_resource type="PackedScene" uid="uid://cskwtk0k0q3ir" path="res://scenes/enemies/basic_enemy.tscn" id="9_bbwhu"]
+[ext_resource type="PackedScene" uid="uid://332lscantshh" path="res://scenes/UI/death_animation.tscn" id="10_u14je"]
 
 [sub_resource type="Curve2D" id="Curve2D_y3vv8"]
 _data = {
@@ -21,7 +22,7 @@ script = ExtResource("1_jadki")
 enemy_scene = ExtResource("2_5kw0i")
 
 [node name="Player" parent="." instance=ExtResource("1_ux7or")]
-position = Vector2(78, 83)
+position = Vector2(98, 282)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(3, 3)
@@ -75,6 +76,10 @@ position = Vector2(467, 349)
 [node name="BasicEnemy4" parent="enemys" instance=ExtResource("9_bbwhu")]
 position = Vector2(596, 123)
 
+[node name="DeathAnimation" parent="." instance=ExtResource("10_u14je")]
+
+[connection signal="player_died" from="Player" to="DeathAnimation" method="_on_player_player_died"]
 [connection signal="timeout" from="ShopTimer" to="." method="_on_shop_timer_timeout"]
 [connection signal="pressed" from="PlayerStatus/CloseStatusButton" to="." method="_on_close_status_button_pressed"]
+[connection signal="player_talking" from="GhostMasterNpc" to="Player" method="_on_ghost_master_npc_player_talking"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bvu1kdcehtp5s"]
+[gd_scene load_steps=11 format=3 uid="uid://bvu1kdcehtp5s"]
 
 [ext_resource type="Texture2D" uid="uid://gyn0sq3cfw3k" path="res://assets/tilemap.png" id="1_6i3ln"]
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_ggj4s"]
@@ -27,14 +27,30 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
+tracks/0/path = NodePath(".:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_5om8d"]
+resource_name = "die"
+length = 12.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 8.7, 12),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.523599, 1.5708, 1.5708, 0.0]
 }
 
 [sub_resource type="Animation" id="Animation_jx4oh"]
@@ -56,6 +72,7 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5rvps"]
 _data = {
 "RESET": SubResource("Animation_j08yy"),
+"die": SubResource("Animation_5om8d"),
 "get_hit": SubResource("Animation_jx4oh")
 }
 
@@ -71,7 +88,6 @@ sprite_frames = SubResource("SpriteFrames_8h1mq")
 animation = &"walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, 2)
 shape = SubResource("CircleShape2D_sex0f")
 
@@ -118,3 +134,14 @@ grow_horizontal = 2
 libraries = {
 "": SubResource("AnimationLibrary_5rvps")
 }
+
+[node name="DeathTimer" type="Timer" parent="."]
+wait_time = 12.0
+one_shot = true
+
+[node name="RespawnTimer" type="Timer" parent="."]
+wait_time = 7.0
+one_shot = true
+
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
+[connection signal="timeout" from="RespawnTimer" to="." method="_on_respawn_timer_timeout"]

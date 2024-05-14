@@ -1,6 +1,6 @@
 extends Area2D
 
-var speed : float = 200.0
+var speed : float = 100.0
 
 var direction : Vector2 = Vector2.ZERO
 
@@ -27,3 +27,6 @@ func _on_area_entered(area):
 
 func _on_magic_timer_timeout():
 	queue_free()
+	
+func is_magic():
+	pass

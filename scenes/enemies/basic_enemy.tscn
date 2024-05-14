@@ -91,7 +91,6 @@ _data = {
 }
 
 [node name="BasicEnemy" type="CharacterBody2D"]
-collision_mask = 0
 script = ExtResource("1_pcqlq")
 
 [node name="Area2D" type="Area2D" parent="."]

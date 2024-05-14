@@ -1,4 +1,6 @@
+set {on_dialogue} = 1
 if {death_count} == 0:
 	brother-test: Hello kiddo!!
 elif {death_count} == 1:
 	brother-test: Die hurts, nya?
+set {on_dialogue} = 0
