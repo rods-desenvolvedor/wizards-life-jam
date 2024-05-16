@@ -1,11 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://dui06bls6u7rq"]
+[gd_scene load_steps=11 format=3 uid="uid://dui06bls6u7rq"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_jadki"]
 [ext_resource type="PackedScene" uid="uid://bvu1kdcehtp5s" path="res://scenes/player/player.tscn" id="1_ux7or"]
 [ext_resource type="PackedScene" uid="uid://bh75d87fiok4o" path="res://scenes/final_fight/final_fight_enemy.tscn" id="2_5kw0i"]
 [ext_resource type="PackedScene" uid="uid://df0t3clmi0ro8" path="res://scenes/UI/player_status.tscn" id="5_5tq3q"]
 [ext_resource type="PackedScene" uid="uid://b1f633y005pgb" path="res://scenes/tests/test_map.tscn" id="5_w6puo"]
-[ext_resource type="Texture2D" uid="uid://b2noxysbw72ml" path="res://assets/UI/PNG/iconCross_grey.png" id="6_bjrep"]
 [ext_resource type="PackedScene" uid="uid://btk0vbb2f8hc1" path="res://scenes/npcs/ghost_master_npc.tscn" id="7_x0w0a"]
 [ext_resource type="PackedScene" uid="uid://b5545ptub214b" path="res://scenes/final_fight/final_fight_area.tscn" id="8_f0bj5"]
 [ext_resource type="PackedScene" uid="uid://cskwtk0k0q3ir" path="res://scenes/enemies/basic_enemy.tscn" id="9_bbwhu"]
@@ -33,14 +32,7 @@ wait_time = 20.0
 autostart = true
 
 [node name="PlayerStatus" parent="." instance=ExtResource("5_5tq3q")]
-
-[node name="CloseStatusButton" type="Button" parent="PlayerStatus"]
-process_mode = 2
-offset_left = 687.0
-offset_top = 190.0
-offset_right = 711.0
-offset_bottom = 213.0
-icon = ExtResource("6_bjrep")
+visible = false
 
 [node name="test_map" parent="." instance=ExtResource("5_w6puo")]
 
@@ -76,10 +68,47 @@ position = Vector2(467, 349)
 [node name="BasicEnemy4" parent="enemys" instance=ExtResource("9_bbwhu")]
 position = Vector2(596, 123)
 
+[node name="BasicEnemy5" parent="enemys" instance=ExtResource("9_bbwhu")]
+position = Vector2(233, 343)
+
+[node name="BasicEnemy6" parent="enemys" instance=ExtResource("9_bbwhu")]
+position = Vector2(102, 413)
+
+[node name="BasicEnemy7" parent="enemys" instance=ExtResource("9_bbwhu")]
+position = Vector2(249, 516)
+
+[node name="BasicEnemy8" parent="enemys" instance=ExtResource("9_bbwhu")]
+position = Vector2(408, 476)
+
+[node name="BasicEnemy9" parent="enemys" instance=ExtResource("9_bbwhu")]
+position = Vector2(379, 618)
+
+[node name="BasicEnemy10" parent="enemys" instance=ExtResource("9_bbwhu")]
+position = Vector2(127, 648)
+
+[node name="BasicEnemy11" parent="enemys" instance=ExtResource("9_bbwhu")]
+position = Vector2(638, 418)
+
+[node name="BasicEnemy12" parent="enemys" instance=ExtResource("9_bbwhu")]
+position = Vector2(543, 653)
+
+[node name="BasicEnemy13" parent="enemys" instance=ExtResource("9_bbwhu")]
+position = Vector2(268, 693)
+
+[node name="BasicEnemy14" parent="enemys" instance=ExtResource("9_bbwhu")]
+position = Vector2(749, 645)
+
+[node name="BasicEnemy15" parent="enemys" instance=ExtResource("9_bbwhu")]
+position = Vector2(668, 685)
+
+[node name="BasicEnemy16" parent="enemys" instance=ExtResource("9_bbwhu")]
+position = Vector2(776, 450)
+
 [node name="DeathAnimation" parent="." instance=ExtResource("10_u14je")]
+process_mode = 3
 
 [connection signal="player_died" from="Player" to="DeathAnimation" method="_on_player_player_died"]
 [connection signal="timeout" from="ShopTimer" to="." method="_on_shop_timer_timeout"]
-[connection signal="pressed" from="PlayerStatus/CloseStatusButton" to="." method="_on_close_status_button_pressed"]
+[connection signal="close_status" from="PlayerStatus" to="." method="_on_player_status_close_status"]
 [connection signal="player_talking" from="GhostMasterNpc" to="Player" method="_on_ghost_master_npc_player_talking"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]

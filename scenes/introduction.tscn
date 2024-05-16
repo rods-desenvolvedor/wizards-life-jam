@@ -1,0 +1,177 @@
+[gd_scene load_steps=7 format=3 uid="uid://dpana0gfpckcl"]
+
+[ext_resource type="Texture2D" uid="uid://ck52x3uvjpgg8" path="res://assets/UI/PNG/buttonLong_blue.png" id="1_73kxi"]
+[ext_resource type="Script" path="res://scripts/introduction.gd" id="1_cm4v6"]
+[ext_resource type="AudioStream" uid="uid://ddgv7ipi8r3xg" path="res://assets/sounds/musics/05 A joyfull get together in the royal chambers (1).wav" id="3_alx5v"]
+
+[sub_resource type="Animation" id="Animation_a4a0j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Control/Button:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/Control/RichTextLabel:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer/Control/VBoxContainer:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_xl4v8"]
+resource_name = "intro"
+length = 8.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Control/Button:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 5, 8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/Control/RichTextLabel:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2, 5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer/Control/VBoxContainer:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eu40o"]
+_data = {
+"RESET": SubResource("Animation_a4a0j"),
+"intro": SubResource("Animation_xl4v8")
+}
+
+[node name="Introduction" type="Node"]
+script = ExtResource("1_cm4v6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_eu40o")
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.506415, 0.355767, 0.30646, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -14.0
+offset_top = 26.0
+offset_right = 26.0
+offset_bottom = 66.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "ROAD TO WIZARD"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -385.0
+offset_top = -205.0
+offset_right = 462.0
+offset_bottom = 223.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 30
+text = "Year 3024 AD, humanity as we knew it has long been gone. The same technology that brought so much comfort to our lives also brought our downfall. It was amidst what seemed like the end of humanity that hope emerged, magic. It is in this context that you are born, a simple peasant who knows almost nothing about magic decides to venture into a dangerous dungeon to seek answers about the disappearance of your brother, who vanished about a year ago. And well... that didn't end very well."
+
+[node name="Button" type="Button" parent="CanvasLayer/Control"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 924.0
+offset_top = 674.0
+offset_right = 1122.0
+offset_bottom = 731.0
+icon = ExtResource("1_73kxi")
+flat = true
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/Button"]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 13.0
+offset_right = 162.0
+offset_bottom = 41.0
+theme_override_font_sizes/font_size = 20
+text = "Press to Skip"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_alx5v")
+volume_db = -10.0
+autoplay = true
+
+[connection signal="pressed" from="CanvasLayer/Control/Button" to="." method="_on_button_pressed"]

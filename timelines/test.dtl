@@ -1,6 +1,10 @@
 set {on_dialogue} = 1
-if {death_count} == 0:
-	brother-test: Hello kiddo!!
-elif {death_count} == 1:
-	brother-test: Die hurts, nya?
+if {death_count} == 1:
+	brother-test: Hello kiddo!! You took quite a beating dont u? HAHAHA
+	Theo: wha...what happened?
+	brother-test: What happenned? YOU DIE HAAHAHA
+elif {death_count} == 2:
+	brother-test: Harder than you though, huh?
+	Theo: You brought me back? Again?
+	Theo: I'm pretty sure this time I was DEAD!! You must be pretty powerful...
 set {on_dialogue} = 0

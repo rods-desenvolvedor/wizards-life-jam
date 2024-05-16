@@ -3,6 +3,7 @@ extends CharacterBody2D
 @onready var attack_timer : Timer = $AttackTimer
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
 @onready var enemy_health_progress_bar : ProgressBar = $ProgressBar
+@onready var audio_controller : AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 signal player_hit
 
@@ -22,16 +23,17 @@ func _process(delta):
 	
 	enemy_health_progress_bar.value = health
 	
-	
 	if health <= 0:
-		player.experience += 10.0
+		VarGlobals.experience += 25.0
 		queue_free()
 		
 	if chasing_player:
 		var dir : Vector2 = (player.position - position).normalized()
-		position += dir * speed * delta
+		velocity = position.direction_to(player.position) * speed
+		move_and_slide()
 		
 	if attacking_player && can_attack:
+		audio_controller.play()
 		player_hit.emit()
 		animation_player.play("attack")
 		player.health -= 10.0
@@ -42,7 +44,7 @@ func _process(delta):
 
 func _on_area_2d_area_entered(area):
 	if area.has_method("is_magic"):
-		health -= 50.0
+		health -= VarGlobals.player_damage
 
 
 func _on_chase_area_body_entered(body):
@@ -63,3 +65,8 @@ func _on_attack_area_body_exited(body):
 
 func _on_attack_timer_timeout():
 	can_attack = true
+
+
+func _on_chase_area_area_entered(area):
+	if area.has_method("is_magic"):
+		chasing_player = true

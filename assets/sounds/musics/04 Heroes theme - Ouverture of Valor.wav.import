@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://yvwpr63l74lw"
+path="res://.godot/imported/04 Heroes theme - Ouverture of Valor.wav-84a37343f4948e996594e6abafb87721.sample"
+
+[deps]
+
+source_file="res://assets/sounds/musics/04 Heroes theme - Ouverture of Valor.wav"
+dest_files=["res://.godot/imported/04 Heroes theme - Ouverture of Valor.wav-84a37343f4948e996594e6abafb87721.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

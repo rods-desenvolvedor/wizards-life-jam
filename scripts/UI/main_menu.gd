@@ -4,7 +4,7 @@ extends CanvasLayer
 
 
 func _on_start_button_pressed():
-	get_tree().change_scene_to_packed(main_scene)
+	get_tree().change_scene_to_file("res://scenes/introduction.tscn")
 
 
 func _on_options_button_pressed():

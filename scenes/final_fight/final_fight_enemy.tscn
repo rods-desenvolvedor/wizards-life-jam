@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bh75d87fiok4o"]
+[gd_scene load_steps=12 format=3 uid="uid://bh75d87fiok4o"]
 
 [ext_resource type="Texture2D" uid="uid://cx46p4s4qtst7" path="res://assets/tilemap_packed.png" id="1_1lee1"]
 [ext_resource type="Script" path="res://scripts/final_fight/final_fight_enemy.gd" id="1_tljud"]
@@ -50,6 +50,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(1, 1)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_dgcak"]
 resource_name = "attack"
@@ -79,13 +91,32 @@ tracks/1/keys = {
 "values": [Vector2(1, 1), Vector2(1.5, 1.5), Vector2(1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_fkw00"]
+resource_name = "get_hit"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.870353, 0.000285271, 0.000155847, 1), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7gn27"]
 _data = {
 "RESET": SubResource("Animation_o15u5"),
-"attack": SubResource("Animation_dgcak")
+"attack": SubResource("Animation_dgcak"),
+"get_hit": SubResource("Animation_fkw00")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_8dgtd"]
+
 [node name="FinalFightEnemy" type="CharacterBody2D"]
+motion_mode = 1
 script = ExtResource("1_tljud")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -109,6 +140,21 @@ libraries = {
 "": SubResource("AnimationLibrary_7gn27")
 }
 
+[node name="GetHitArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GetHitArea"]
+shape = SubResource("CircleShape2D_8dgtd")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+modulate = Color(0.949515, 0.0959523, 5.96821e-06, 1)
+offset_left = -12.0
+offset_top = 10.0
+offset_right = 42.0
+offset_bottom = 34.0
+scale = Vector2(0.5, 0.25)
+show_percentage = false
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="area_entered" from="GetHitArea" to="." method="_on_get_hit_area_area_entered"]

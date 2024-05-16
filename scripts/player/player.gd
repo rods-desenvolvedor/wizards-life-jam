@@ -16,36 +16,25 @@ var talking : bool = false
 var targetPosition : Vector2 = Vector2.ZERO
 var shootDirection : Vector2 = Vector2.ZERO
 var dead : bool = false
+var intro_on : bool = true
 
-var money : float = 100.0
-var experience : float = 0.0
+
 var health : float = 100.0
 var mana : float = 100.0
-var player_death_count : int
-
-
-var health_potion : int = 0
-var mana_potion : int = 0
-
-var inventory = {
-	"health_potion" : 0,
-	"mana_potion" : 0
-}
 
 
 @export var basic_magic_scene : PackedScene
 
 func _ready():
-	print(str(player_death_count))
+	print(str(VarGlobals.player_death_counts))
+	dead = false
 	health_progress_bar.value = 100.0
 	mana_progress_bar.value = 100.0
 
 func _process(delta):
-	Dialogic.VAR.death_count = player_death_count 
 	health_progress_bar.value = health
 	mana_progress_bar.value = mana
 	talking = Dialogic.VAR.on_dialogue
-	#print(talking)
 	
 
 func _physics_process(delta):
@@ -66,6 +55,9 @@ func _physics_process(delta):
 		
 		shoot()
 		
+		if direction.length() > 0:
+			direction = direction.normalized()
+		
 
 		if velocity.length() > 0:
 			animation_controller.play("walk")
@@ -82,20 +74,15 @@ func _physics_process(delta):
 	move_and_slide()
 	
 func die():
-	if health <= 0:
+	if health <= 0 and !dead:
+		dead = true
+		VarGlobals.player_death_counts += 1
 		death_timer.start()
 		respawn_timer.start()
 		$CollisionShape2D.disabled = true
-		dead = true
 		player_effects_animation_controller.play("die")
-		health = 100.0
-		mana += 10.0
-		player_death_count += 1
 		player_died.emit()
 		
-		
-	
-
 func shoot():
 	if Input.is_action_just_pressed("attack") && mana >= 5.0:
 		if isShooting:
@@ -127,4 +114,5 @@ func _on_death_timer_timeout():
 
 
 func _on_respawn_timer_timeout():
-	position = get_tree().get_first_node_in_group("start_pos").position
+	if !intro_on:
+		position = get_tree().get_first_node_in_group("start_pos").position

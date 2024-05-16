@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://chvpwvxdc77bd"
+path="res://.godot/imported/02 The Dark Lord - upbeat version.wav-01d261205891d86bad747b94fd5d6cd4.sample"
+
+[deps]
+
+source_file="res://assets/sounds/musics/02 The Dark Lord - upbeat version.wav"
+dest_files=["res://.godot/imported/02 The Dark Lord - upbeat version.wav-01d261205891d86bad747b94fd5d6cd4.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

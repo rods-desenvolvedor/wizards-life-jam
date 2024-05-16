@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://c8jpqnva136em"]
+
+[ext_resource type="Texture2D" uid="uid://yq68261cfybj" path="res://assets/0x72_DungeonTilesetII_v1.7/0x72_DungeonTilesetII_v1.7/frames/chest_full_open_anim_f0.png" id="1_s0jrv"]
+[ext_resource type="Texture2D" uid="uid://bpoxst17jgps6" path="res://assets/0x72_DungeonTilesetII_v1.7/0x72_DungeonTilesetII_v1.7/frames/chest_empty_open_anim_f2.png" id="3_ffkqr"]
+[ext_resource type="Script" path="res://scripts/utils/mana_chest.gd" id="4_qlsye"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m41he"]
+atlas = ExtResource("1_s0jrv")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vun6p"]
+atlas = ExtResource("3_ffkqr")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mpcam"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m41he")
+}],
+"loop": true,
+"name": &"closed",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vun6p")
+}],
+"loop": true,
+"name": &"opened",
+"speed": 8.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gq0lp"]
+radius = 33.9559
+
+[node name="ManaChest" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_mpcam")
+animation = &"opened"
+script = ExtResource("4_qlsye")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_gq0lp")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

@@ -34,15 +34,6 @@ func _on_shop_timer_timeout():
 	day += 1
 	shop_timer.start()
 
-
-func _on_close_status_button_pressed():
-	print("despausar")
-	status_open = false
-	get_tree().paused = false
-	$PlayerStatus.hide()
-	
-
-
 func _on_mob_timer_timeout():
 	var final_enemy : CharacterBody2D = enemy_scene.instantiate()
 	var mob_spawn_location = $MobPath/MobSpawnLocation
@@ -53,3 +44,10 @@ func _on_mob_timer_timeout():
 	final_enemy.position = mob_spawn_location.position
 	
 	add_child(final_enemy)
+
+
+func _on_player_status_close_status():
+	print("despausar")
+	status_open = false
+	get_tree().paused = false
+	$PlayerStatus.hide()

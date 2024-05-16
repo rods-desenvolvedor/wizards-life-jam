@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://d38886fk6eio3"]
+[gd_scene load_steps=16 format=3 uid="uid://d38886fk6eio3"]
 
 [ext_resource type="Script" path="res://scripts/magics/basic_magic.gd" id="1_3pjay"]
 [ext_resource type="Texture2D" uid="uid://cvvh16rwlkhve" path="res://assets/spells/Firebolt SpriteSheet.png" id="3_ojhlm"]
@@ -23,6 +23,30 @@ region = Rect2(96, 0, 48, 48)
 atlas = ExtResource("3_ojhlm")
 region = Rect2(144, 0, 48, 48)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ds4qd"]
+atlas = ExtResource("3_ojhlm")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bspwg"]
+atlas = ExtResource("3_ojhlm")
+region = Rect2(288, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_01ddg"]
+atlas = ExtResource("3_ojhlm")
+region = Rect2(336, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2hrsg"]
+atlas = ExtResource("3_ojhlm")
+region = Rect2(384, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_717ax"]
+atlas = ExtResource("3_ojhlm")
+region = Rect2(432, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q47h8"]
+atlas = ExtResource("3_ojhlm")
+region = Rect2(480, 0, 48, 48)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_5wpc5"]
 animations = [{
 "frames": [{
@@ -41,10 +65,34 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ds4qd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bspwg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_01ddg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2hrsg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_717ax")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q47h8")
+}],
+"loop": true,
+"name": &"explode",
+"speed": 10.0
 }]
 
 [node name="BasicMagic" type="Area2D"]
 scale = Vector2(0.5, 0.5)
+collision_layer = 3
 script = ExtResource("1_3pjay")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -53,8 +101,9 @@ shape = SubResource("RectangleShape2D_1yvlq")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-13, -6)
 sprite_frames = SubResource("SpriteFrames_5wpc5")
+animation = &"explode"
 autoplay = "default"
-frame_progress = 0.001839
+frame_progress = 0.933659
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_xlko7")
@@ -64,4 +113,5 @@ wait_time = 15.0
 autostart = true
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="MagicTimer" to="." method="_on_magic_timer_timeout"]

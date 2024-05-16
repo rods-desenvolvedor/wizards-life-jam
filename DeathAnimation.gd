@@ -7,7 +7,9 @@ extends CanvasLayer
 var player : CharacterBody2D
 
 func _ready():
+	hide()
 	player = get_tree().get_first_node_in_group("player")
 
 func _on_player_player_died():
+	show()
 	animation_controller.play("player_dies")
